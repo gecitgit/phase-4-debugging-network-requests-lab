@@ -61,13 +61,34 @@ developing your own process.
 ## Your Notes Here
 
 - Add a new toy when the toy form is submitted
-
+  - Problem:
+     - On submit form clears and returns status 500 -- "Internal Server Error"
+     - uninitialized constant ToysController::Toys
+  - Plan: 
+     - make sure :create is added to config>routes
+     - make sure a create method exists in controller
+     - make sure create sends json
   - How I debugged:
+     - ROUTES already had :create
+     - TOYS controller had Toys.create instead of Toy.create
+     - change to Toy = SUCCESS
 
 - Update the number of likes for a toy
-
+  - Problems: 
+      - Pressing submit displays "Uncaught (in promise) SyntaxError: Unexpected end of JSON input" @ ToyCard.js:27.1
+      - 204 status in Network tab on the Like <3 click
+  - Plan: 
+      - Check end of fetch in ToyCard
+      - Make sure that update method is returning json if ToyCard is looking for JSON
   - How I debugged:
+      - Added 'render json: toy, status: :created' to update method = SUCCESS
 
 - Donate a toy to Goodwill (and delete it from our database)
-
+  - Problem:
+      - Console gives 404 error on delete button
+      - RoutingError -- no route matches [DELETE]
+  - Plan: 
+      - Make sure :destroy is in config>routes
+      - Make sure destroy method is defined in controller
   - How I debugged:
+      - added :destroy to routes = SUCCESS
